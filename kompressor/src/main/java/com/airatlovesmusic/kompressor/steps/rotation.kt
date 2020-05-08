@@ -2,7 +2,7 @@ package com.airatlovesmusic.kompressor.steps
 
 import android.graphics.Bitmap
 import android.graphics.Matrix
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import java.io.InputStream
 
 /**

@@ -2,10 +2,7 @@ package com.airatlovesmusic.kompressor
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.airatlovesmusic.kompressor.steps.CompressionStep
-import com.airatlovesmusic.kompressor.steps.plus
-import com.airatlovesmusic.kompressor.steps.resolutionCompression
-import com.airatlovesmusic.kompressor.steps.rotationCompression
+import com.airatlovesmusic.kompressor.steps.*
 import java.io.InputStream
 import java.io.OutputStream
 
@@ -25,10 +22,9 @@ class ImageCompressor {
         format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG,
         quality: Int = 80,
         steps: CompressionStep = defaultSteps(inputStream)
-    ): OutputStream {
+    ) {
         val result = steps.invoke(BitmapFactory.decodeStream(inputStream))
         result.compress(format, quality, outputStream)
-        return outputStream
     }
 
     private fun defaultSteps(inputStream: InputStream): CompressionStep =
