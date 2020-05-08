@@ -9,7 +9,7 @@ Remember, contentUris can point not only to local files, but also to "virtual" f
 ## Gradle
 ```groovy
 dependencies {
-    implementation 'com.airatlovesmusic:kompressor:0.1.0'
+    implementation 'com.airatlovesmusic:kompressor:0.1'
 }
 ```
 ## Let's compress something!
