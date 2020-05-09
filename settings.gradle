@@ -1,2 +1,3 @@
 rootProject.name='Kompressor'
 include ':kompressor'
+include ':sample'
