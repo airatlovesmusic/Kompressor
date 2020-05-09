@@ -16,7 +16,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.airatlovesmusic.kompressor.ImageCompressor
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 /**
@@ -64,16 +63,15 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun showImage(contentUri: Uri) {
-        val baos = ByteArrayOutputStream()
-        imageCompressor.compress(
+        val compressedData = imageCompressor.compress(
             inputStream = contentResolver.openInputStream(contentUri)!!,
-            outputStream = baos,
             format = Bitmap.CompressFormat.JPEG,
             quality = 80
         )
-        val byteArray = baos.toByteArray()
         iv_image.setImageBitmap(
-            BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            BitmapFactory.decodeStream(
+                compressedData
+            )
         )
     }
 
@@ -124,5 +122,4 @@ class MainActivity: AppCompatActivity() {
         }.apply { startActivityForResult(this, REQUEST_GALLERY_PHOTO) }
     }
     // Gallery region end
-
 }
