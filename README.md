@@ -15,27 +15,25 @@ dependencies {
 ## Let's compress something!
 ```kotlin
 val inputStream = context.contentResolver.openInputStream(contentUri)
-val outputStream = ...  
-imageCompressor.compress(
+val compressedData = imageCompressor.compress(
         inputStream = context.contentResolver.openInputStream(contentUri),
-        outputStream = outputStream,
         format = Bitmap.CompressFormat.JPEG,
         quality = 70
 )
+val compressedBitmap = BitmapFactory.decodeStream(compressedData)
 ```
 Do whatever you want with received OutputStream, for example you can make Retrofit RequestBody with bytes from stream.
 
 ## Let's compress something, but with configuration!
 ```kotlin
 val inputStream = context.contentResolver.openInputStream(contentUri)
-val outputStream = ...  
-imageCompressor.compress(
+val compressedData = imageCompressor.compress(
         inputStream = context.contentResolver.openInputStream(contentUri),
-        outputStream = outputStream,
         format = Bitmap.CompressFormat.PNG,
         quality = 70,
         steps = resolutionCompression(outHeight = 720, outWidth = 1024) + sizeCompression(FILE_MAX_SIZE)
 )
+val compressedBitmap = BitmapFactory.decodeStream(compressedData)
 ```
 This library has multiple compression constraints you can combine: 
 - resolutionCompression (set up required height and width of result image), 
@@ -44,18 +42,16 @@ This library has multiple compression constraints you can combine:
 ## Let's compress something, but with custom configuration!
 ```kotlin
 val inputStream = context.contentResolver.openInputStream(contentUri)
-val outputStream = ...  
-imageCompressor.compress(
+val compressedData = imageCompressor.compress(
         inputStream = context.contentResolver.openInputStream(contentUri),
-        outputStream = outputStream,
         format = Bitmap.CompressFormat.PNG,
         quality = 70,
         steps = resolutionCompression(outHeight = 720, outWidth = 1024) + { bm: Bitmap -> bm }
 )
+val compressedBitmap = BitmapFactory.decodeStream(compressedData)
 ```
 You can also easily add your own custom compression steps by passing function which takes Bitmap and returns Bitmap.
 ## What's next
 - More friendly API
 - Error handling
-- Sample Android app
 - Video compression
